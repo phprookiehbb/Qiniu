@@ -4,7 +4,7 @@
  * @Author: CraspHB彬
  * @Date:   2018-10-10 10:27:33
  * @Email:   646054215@qq.com
- * @Last Modified time: 2018-10-10 15:39:03
+ * @Last Modified time: 2018-10-10 17:24:33
  */
 namespace Crasphb;
 
@@ -39,7 +39,7 @@ class Qiniu{
         	'bucket' => $bucket,
         ];
         $qiniu = array_merge(config('qiniu') , array_filter($config));
-        //$qiniu = array_filter($config);
+
 		if(empty($qiniu['accessKey']) || empty($qiniu['secretKey'])){
         	throw new Exception('配置文件不正确，请检查配置',10001);
         }        
@@ -111,7 +111,7 @@ class Qiniu{
 	 */
 	public function getUpToken($bucket = '' , $expires = '3600'){
 		$token = Cache::get('upToken');
-		$token = file_get_contents('./index.php');
+
 		//从缓存中获取token
 		if(!empty($token)){
 			return $token;
@@ -126,7 +126,7 @@ class Qiniu{
 		//获取upToken并设置缓存
 		$upToken = $this->auth->uploadToken($this->bucket , null , $expires);
 		Cache::set('upToken',$upToken,$expires);
-		//file_put_contents('./index.php',$upToken);
+
 		return $upToken;
 	}
 }
