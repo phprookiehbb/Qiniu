@@ -4,7 +4,7 @@
  * @Author: CraspHB彬
  * @Date:   2018-10-10 10:27:33
  * @Email:   646054215@qq.com
- * @Last Modified time: 2018-10-10 14:36:25
+ * @Last Modified time: 2018-10-10 15:39:03
  */
 namespace Crasphb;
 
@@ -94,6 +94,8 @@ class Qiniu{
 			if($err !== null){
 				throw new Exception('上传文件失败',10001);
 			}   
+			//删除本地图片
+			@unlink($filePath);
 			//返回图片名称key,用于拼接外链
 			return $ret['key'];      
         }else{
